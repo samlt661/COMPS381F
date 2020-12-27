@@ -2,7 +2,7 @@
     "name": "server",
     "description": "COMPS381F Project",
     "author": "Sam TSE <s1204993@ouhk.edu.hk>",
-    "version": "0.0.1",
+    "version": "1.0.2",
     "dependencies": {
         "body-parser": "*",
         "cookie-session": "*",
