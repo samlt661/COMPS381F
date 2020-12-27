@@ -1,0 +1,97 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous" type="3b52d2be6bb3881bae78e325-text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous" type="3b52d2be6bb3881bae78e325-text/javascript"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" type="3b52d2be6bb3881bae78e325-text/javascript"></script>
+        <title>Login Page | COMPS381F</title>
+        <style>
+            body{
+                margin-top: 10px;;
+                background-color: #000;
+                font-family: 'Montserrat', sans-serif;
+                color: #fff;
+            }
+            .container{
+                max-width: 512px;
+                border:1px solid #fff;
+                border-radius: 6px;
+            }
+            input[type=password],input[type=text], select {
+            width: 95%;
+            padding: 10px 20px 10px 20px;
+            margin: 1px 10px 10px 10px;
+            height: 60px;
+            display: inline-block;
+            border: 1px solid #fff;
+            border-radius: 0px;
+            background: #000;
+            color: #fff;
+            font-size: 20px;
+            font-family: Montserrat;
+            border-radius: 3px;
+        }
+        </style>
+    </head>
+    <script src="https://ajax.cloudflare.com/cdn-cgi/scripts/7089c43e/cloudflare-static/rocket-loader.min.js" data-cf-settings="853acdae7fea052e07b300ff-|49"></script>
+    <body style="font-family: Montserrat;">
+        <div class="container">
+            <form method="POST" action="/login" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="header" style="text-align: center; font-size: 26px;">COMPS381F Project<br>
+                            Login Page</div>
+                        <div class="alert alert-warning <%=isShow %>" id="outputErrorMessage"><%=errorMsg %></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-2">
+                        <label>Username</label>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-12">
+                        <input type="text" name="username" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2">
+                        <label>Password</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <input type="password" name="password">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6" style="padding: 0px 0px 0px 30px">
+                        <label style="font-family: Montserrat; color: #fff; font-size: 14px;">
+                        <input type="checkbox" name="remember" id="checked">Remember Me</label>
+                        
+                    </div>
+                        <div class="col-6" style="padding: 0px 30px 0px 00px">
+                        <a href="/register">Register a new Account</a><br>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button type="submit" class="btn btn-outline-info">Login</button>
+                        <button type="reset" class="btn btn-outline-warning">Reset</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col" style="text-align: center;">
+                        <a href="/apilanding" target="_blank" style="font-size: 20px;color: #f99;"><p>Go To API Page</p></a>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </body>
+</html>
