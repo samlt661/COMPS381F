@@ -1,0 +1,139 @@
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous" type="853acdae7fea052e07b300ff-text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous" type="853acdae7fea052e07b300ff-text/javascript"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" type="853acdae7fea052e07b300ff-text/javascript"></script>
+<title>Read Restaurant | COMPS381F</title>
+<style>
+    body{
+        background-color: #000;
+        font-family: 'Montserrat', sans-serif;
+        color: #fff;
+    }
+	.container{
+		max-width: 1068px;
+		min-width: 320px;
+		z-index: 0;
+        margin-top: 80px;
+	}
+    table{
+	    background: #ddd;
+    }
+    table.table-bordered{
+        border:1px solid #888;
+        margin-top:0px;
+    }
+    table.table-bordered > thead > tr > th{
+        border:1px solid #888;
+    }
+    table.table-bordered > tbody > tr > td{
+        border:1px solid #888;
+    }
+    .tableHead{
+        background-color: #a0a0a0;
+    }
+    @media (min-width: 1024px) {
+        .navbar-nav.navbar-center {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%);
+        }
+    }
+    @media (min-width: 1024px) {
+        .navbar-nav.navbar-right {
+            position: absolute;
+            right: 0%;
+            transform: translate(0%);
+        }
+    }
+</style>
+</head>
+    <script src="https://ajax.cloudflare.com/cdn-cgi/scripts/7089c43e/cloudflare-static/rocket-loader.min.js" data-cf-settings="853acdae7fea052e07b300ff-|49"></script>
+        <body style="font-family: Montserrat;">
+            <div class="container">
+                <div style="text-align: center; font-size: 15px;">
+                    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light" style="align-content: center;text-align: center;z-index: 1;background-color:#fff;color:#000;">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon" style="color: #fff;"></span>
+                        </button>
+                        <a class="navbar-brand d-block d-lg-none" style="color: #000;" href="/readDB">Restaurant</a>
+                        <a class="navbar-brand d-none d-lg-block" style="color: #000;" href="/readDB">Restaurant</a>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent" style="color:#FFF;">
+                            <ul class="navbar-nav mr-auto navbar-center">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/readDB">All Restaurant</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/search">Search Restaurant</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/addRestaurant">Add Restaurant</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/logout">Logout</a>
+                                </li>
+                            </ul>
+                            <span class="navbar-nav mr-auto navbar-right navbar-text" style="right: 0%;">
+                                <span style="color: #000;">User: <%=userInfo %> </span>
+                            </span>
+                        </div>
+                    </nav>
+                </div>
+                <div class="row">
+                    <br>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="tableHead">All (<%=totalCol %>) Restaurant</th>
+                                </tr>
+                                <tr>
+                                    <th><button type="button" class="btn btn-outline-info" onclick="location.href = '/addRestaurant'">Create Restaurant</button></th>
+                                </tr>
+                                <tr>
+                                    <th><button type="button" class="btn btn-outline-primary" onclick="location.href = '/readDB?t=Name'">View By Name</button>
+                                        <button type="button" class="btn btn-outline-primary" onclick="location.href = '/readDB?t=Borough'">View By Borough</button>
+                                        <button type="button" class="btn btn-outline-primary" onclick="location.href = '/readDB?t=Cuisine'">View By Cuisine</button></th>
+                                </tr>
+                                <tr>
+                                    <th class="tableHead">Viewing Restaurant by <%=dbCol %></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% if(dbCol == "Name"){%>
+                                    <% for (var r of dbDocs){%>
+                                        <% if(r.Name.length != 0){%>
+                                        <tr>
+                                            <td><a href="/showDetails?_id=<%= r._id %>" target="_blank" style="color:#f26; text-decoration: underline;"><%= r.Name %></a></td>
+                                        </tr>
+                                        <% }%>
+                                    <% }%>  
+                                <%}else if(dbCol == "Borough"){%>
+                                    <% for (var r of dbDocs){%>
+                                        <% if(r.Borough.length != 0){%>
+                                        <tr>
+                                            <td><a href="/showDetails?_id=<%= r._id %>" target="_blank" style="color:#f26; text-decoration: underline;"><%= r.Borough %></a></td>
+                                        </tr>
+                                        <% }%>  
+                                    <% }%>  
+                                <%}else if(dbCol == "Cuisine"){%>
+                                    <% for (var r of dbDocs){%>
+                                        <% if(r.Cuisine.length != 0){%>
+                                        <tr>
+                                            <td><a href="/showDetails?_id=<%= r._id %>" target="_blank" style="color:#f26; text-decoration: underline;"><%= r.Cuisine %></a></td>
+                                        </tr>
+                                        <% }%>  
+                                    <% }%>  
+                                <%}%>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </body>
+    </html>

@@ -1,0 +1,197 @@
+<html>
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous" type="853acdae7fea052e07b300ff-text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous" type="853acdae7fea052e07b300ff-text/javascript"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" type="853acdae7fea052e07b300ff-text/javascript"></script>
+        <title>Add Restaurant | COMPS381F</title>
+        <style>
+            body{
+                background-color: #000;
+                font-family: 'Montserrat', sans-serif;
+                color: #fff;
+            }
+            .container{
+                margin-top: 50px;;
+                max-width: 1024px;
+            }
+            input[type=text], select {
+                width: 95%;
+                padding-top: 2px;
+                padding-left: 10px;
+                padding-bottom: 2px;
+                padding-right: 10px;
+                height: 40px;
+                margin: 10px;
+                display: inline-block;
+                border: 1px solid #111;
+                border-radius: 0px;
+                background: transparent;
+                color: #000;
+                font-size: 20px;
+                font-family: Montserrat;
+                border-radius: 3px;
+            }
+            table{
+                background: #fff;
+            }
+            table.table-bordered{
+                border:1px solid #888;
+                margin-top:20px;
+            }
+            table.table-bordered > thead > tr > th{
+                border:1px solid #888;
+            }
+            table.table-bordered > tbody > tr > td{
+                border:1px solid #888;
+            }
+            .tableHead{
+                background-color: #a0a0a0;
+            }
+            @media (min-width: 1024px) {
+                .navbar-nav.navbar-center {
+                    position: absolute;
+                    left: 50%;
+                    transform: translate(-50%);
+                }
+            }
+            @media (min-width: 1024px) {
+                .navbar-nav.navbar-right {
+                    position: absolute;
+                    right: 0%;
+                    transform: translate(0%);
+                }
+            }
+        </style>
+        <script>
+            function activateSpinner(){
+                document.getElementById('spinning').classList.remove('d-none');
+            }
+            let globalLongitude=0,globalLatitude=0;
+            function getLocation() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showPosition, showError);
+                } 
+            }
+            function showPosition(position) {
+                let roundedLongitude = Math.round(position.coords.longitude*100000000)/100000000;
+                let roundedLatitude = Math.round(position.coords.latitude*100000000)/100000000;
+                globalLongitude = roundedLongitude;
+                globalLatitude = roundedLatitude;
+                document.getElementById("gpsLon").value = roundedLongitude;
+                document.getElementById("gpsLat").value = roundedLatitude;
+            }
+            function showError(error) {
+                switch(error.code) {
+                    case error.PERMISSION_DENIED:
+                        window.alert("Please Enable Location Service!");
+                    break;
+                    case error.POSITION_UNAVAILABLE:
+                            window.alert("Position Not Avaliable! ");
+                    break;
+                    case error.TIMEOUT:
+                            window.alert("Timeout!");
+                    break;
+                    case error.UNKNOWN_ERROR:
+                            window.alert("Unknown!");
+                    break;
+                }
+            }
+        </script>
+    </head>
+    <script src="https://ajax.cloudflare.com/cdn-cgi/scripts/7089c43e/cloudflare-static/rocket-loader.min.js" data-cf-settings="853acdae7fea052e07b300ff-|49"></script>
+    <body style="font-family: Montserrat;">
+        <div class="container">
+            <div style="text-align: center; font-size: 15px;">
+                <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light" style="align-content: center;text-align: center;z-index: 1;background-color:#fff;color:#000;">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon" style="color: #fff;"></span>
+                    </button>
+                    <a class="navbar-brand d-block d-lg-none" style="color: #000;" href="/readDB">Restaurant</a>
+                    <a class="navbar-brand d-none d-lg-block" style="color: #000;" href="/readDB">Restaurant</a>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent" style="color:#FFF;">
+                        <ul class="navbar-nav mr-auto navbar-center">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/readDB">All Restaurant</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/search">Search Restaurant</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/addRestaurant">Add Restaurant</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logout">Logout</a>
+                            </li>
+                        </ul>
+                        <span class="navbar-nav mr-auto navbar-right navbar-text" style="right: 0%;">
+                            <span style="color: #000;">User: <%=userInfo %> </span>
+                        </span>
+                    </div>
+                </nav>
+            </div>
+                <div class="row">
+                    <div class="col">
+                        <form method="POST" action="/addRestaurant" enctype="multipart/form-data"> 
+                            <table class="table table-bordered table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="tableHead" colspan="2">Create New Restaurant</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="width: 20%;">Name: </td>
+                                        <td><input type="text" name="name" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Borough: </td>
+                                        <td><input type="text" name="borough" ></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cuisine: </td>
+                                        <td><input type="text" name="cuisine" ></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Street: </td>
+                                        <td><input type="text" name="street" ></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Building: </td>
+                                        <td><input type="text" name="building" ></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Zipcode: </td>
+                                        <td><input type="text" name="zipcode" ></td>
+                                    </tr>
+                                    <tr>
+                                        <td>GPS: (lon.) <br><button type="button" class="btn btn-sm btn-outline-info" onclick="getLocation()">Current Location</button></td>
+                                        <td><input type="text" name="gpsLon" id="gpsLon"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>GPS: (lat.) <br><button type="button" class="btn btn-sm btn-outline-info" onclick="getLocation()">Current Location</button></td>
+                                        <td><input type="text" name="gpsLat" id="gpsLat"></td>
+                                    </tr>
+                                    <tr>
+                                        <td> Photo </td>
+                                        <td><input type="file" name="imageToUpload"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Created By: </td>
+                                        <td><input type="text" name="owner" value="<%=userInfo %>" required readonly></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2"><button type="submit" class="btn btn-outline-success" onclick="activateSpinner()"><span class="spinner-border spinner-border-sm d-none" id="spinning"></span>Create</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+        </div>
+
+    </body>
+</html>

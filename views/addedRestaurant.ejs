@@ -1,0 +1,204 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous" type="853acdae7fea052e07b300ff-text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous" type="853acdae7fea052e07b300ff-text/javascript"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" type="853acdae7fea052e07b300ff-text/javascript"></script>
+            <title>Add Restaurant | COMPS381F</title>
+        <style>
+            body{
+                background-color: #000;
+                font-family: 'Montserrat', sans-serif;
+                color: #fff;
+            }
+            .container{
+                margin-top: 50px;;
+                max-width: 1024px;
+            }
+            table{
+                background: #fff;
+            }
+            .table{
+                border-color: #ddd;
+            }
+            table.table-bordered{
+                border:1px solid #888;
+                margin-top:20px;
+            }
+            table.table-bordered > thead > tr > th{
+                border:1px solid #888;
+            }
+            table.table-bordered > tbody > tr > td{
+                border:1px solid #888;
+            }
+            .tableHead{
+                background-color: #a0a0a0;
+            }
+            @media (min-width: 1024px) {
+                .navbar-nav.navbar-center {
+                    position: absolute;
+                    left: 50%;
+                    transform: translate(-50%);
+                }
+            }
+            @media (min-width: 1024px) {
+                .navbar-nav.navbar-right {
+                    position: absolute;
+                    right: 0%;
+                    transform: translate(0%);
+                }
+            }
+
+        </style>
+    </head>
+    <script src="https://ajax.cloudflare.com/cdn-cgi/scripts/7089c43e/cloudflare-static/rocket-loader.min.js" data-cf-settings="853acdae7fea052e07b300ff-|49"></script>
+    <body style="font-family: Montserrat;">
+        <div class="container">
+            <div style="text-align: center; font-size: 15px;">
+                <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light" style="align-content: center;text-align: center;z-index: 1;background-color:#fff;color:#000;">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon" style="color: #fff;"></span>
+                    </button>
+                    <a class="navbar-brand d-block d-lg-none" style="color: #000;" href="/readDB">Restaurant</a>
+                    <a class="navbar-brand d-none d-lg-block" style="color: #000;" href="/readDB">Restaurant</a>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent" style="color:#FFF;">
+                        <ul class="navbar-nav mr-auto navbar-center">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/readDB">All Restaurant</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/search">Search Restaurant</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/addRestaurant">Add Restaurant</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logout">Logout</a>
+                            </li>
+                        </ul>
+                        <span class="navbar-nav mr-auto navbar-right navbar-text" style="right: 0%;">
+                            <span style="color: #000;">User: <%=userInfo %> </span>
+                        </span>
+                    </div>
+                </nav>
+            </div>
+                <div class="row">
+                    <div class="col">
+                        <form method="POST" action="/addRestaurant" enctype="multipart/form-data"> 
+                            <table class="table table-bordered table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="tableHead" colspan="2">
+                                            <%=dbDocs[0].Name%> Restaurant Added<br><br>
+                                            <div class="alert alert-success <%=isShow %>" id="outputErrorMessage"><%=errorMsg %></div>    
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="2"><img src="data:<%=dbDocs[0].PhotoMimeType%>;base64, <%=dbDocs[0].Photo %>" alt="---Image Not Avaliable---" title="Restaurant Image" style="max-width: 512px;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 20%;">Name: </td>
+                                        <td><%= dbDocs[0].Name %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Borough: </td>
+                                        <% if(dbDocs[0].Borough == null || dbDocs[0].Borough.length == 0){ %>
+                                            <td>---Not Avaliable---</td>
+                                        <% }else{%>
+                                            <td><%= dbDocs[0].Borough %></td>
+                                        <% }%>
+                                    </tr>
+                                    <tr>
+                                        <td>Cuisine: </td>
+                                        <% if(dbDocs[0].Cuisine == null || dbDocs[0].Cuisine.length == 0){ %>
+                                            <td>---Not Avaliable---</td>
+                                        <% }else{%>
+                                            <td><%= dbDocs[0].Cuisine %></td>
+                                        <% }%>
+                                    </tr>
+                                    <% if(dbDocs[0].Address == null || dbDocs[0].Address.length == 0){ %>
+                                        <tr>
+                                            <td>Street: </td>
+                                            <td>---Not Avaliable---</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Building: </td>
+                                            <td>---Not Avaliable---</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Zipcode: </td>
+                                            <td>---Not Avaliable---</td>
+                                        </tr>
+                                        <tr>
+                                            <td>GPS: </td>
+                                            <td>---Not Avaliable---</td>
+                                        </tr>
+                                    <% }else{%>
+                                    <tr>
+                                        <td>Street: </td>
+                                        <% if(dbDocs[0].Address.Street == null || dbDocs[0].Address.Street.length == 0){ %>
+                                            <td>---Not Avaliable---</td>
+                                        <% }else{%>
+                                            <td><%= dbDocs[0].Address.Street %></td>
+                                        <% }%>
+                                    </tr>
+                                    <tr>
+                                        <td>Building: </td>
+                                        <% if(dbDocs[0].Address.Building == null || dbDocs[0].Address.Building.length == 0){ %>
+                                            <td>---Not Avaliable---</td>
+                                        <% }else{%>
+                                            <td><%= dbDocs[0].Address.Building %></td>
+                                        <% }%>
+                                    </tr>
+                                    <tr>
+                                        <td>Zipcode: </td>
+                                        <% if(dbDocs[0].Address.Zipcode == null || dbDocs[0].Address.Zipcode.length == 0){ %>
+                                            <td>---Not Avaliable---</td>
+                                        <% }else{%>
+                                            <td><%= dbDocs[0].Address.Zipcode %></td>
+                                        <% }%>
+                                    </tr>
+                                    <tr>
+                                        <td>GPS: </td>
+                                        <% if(dbDocs[0].Address.Coords[0].length == 0){ %>
+                                            <td>---Not Avaliable---</td>
+                                        <% }else{%>
+                                            <td>[<%= dbDocs[0].Address.Coords[0] %>, <%= dbDocs[0].Address.Coords[1] %>]</td>
+                                        <% }%>
+                                    </tr>
+                                    <% }%>
+                                    <tr>
+                                        <td>Rating: </td>
+                                        <% if(dbDocs[0].Rating == null){ %>
+                                            <td>---Not Avaliable---</td>
+                                        <% }else{%>
+                                            <td><%= dbDocs[0].Borough %></td>
+                                        <% }%>
+                                    </tr>
+                                    <tr>
+                                        <td>Created By: </td>
+                                        <% if(dbDocs[0].Owner == null){ %>
+                                            <td>---Not Avaliable---</td>
+                                        <% }else{%>
+                                            <td><%= dbDocs[0].Owner %></td>
+                                        <% }%>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <a href="/readDB"><button" class="btn btn-outline-dark">Back</button></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+        </div>
+
+    </body>
+</html>

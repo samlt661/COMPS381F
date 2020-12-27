@@ -1,0 +1,114 @@
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous" type="853acdae7fea052e07b300ff-text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous" type="853acdae7fea052e07b300ff-text/javascript"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" type="853acdae7fea052e07b300ff-text/javascript"></script>
+<title>API Landing Page | COMPS381F</title>
+<style>
+    body{
+        background-color: #000;
+        font-family: 'Montserrat', sans-serif;
+        color: #fff;
+    }
+	.container{
+		max-width: 1068px;
+		min-width: 320px;
+		z-index: 0;
+	}
+    table{
+	    background: #ddd;
+    }
+    table.table-bordered{
+        border:1px solid #888;
+        margin-top:0px;
+    }
+    table.table-bordered > thead > tr > th{
+        border:1px solid #888;
+    }
+    table.table-bordered > tbody > tr > td{
+        border:1px solid #888;
+    }
+    .tableHead{
+        background-color: #a0a0a0;
+    }
+    @media (min-width: 1024px) {
+        .navbar-nav.navbar-center {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%);
+        }
+    }
+    @media (min-width: 1024px) {
+        .navbar-nav.navbar-right {
+            position: absolute;
+            right: 0%;
+            transform: translate(0%);
+        }
+    }
+</style>
+<script>
+    function genURL(field){
+        switch(field){
+            case "name":
+                document.getElementById("spanName").innerHTML = document.getElementById("name").value;
+                document.getElementById("aName").setAttribute("href","/api/restaurant/name/"+document.getElementById("name").value);
+                break;
+            case "borough":
+                document.getElementById("spanBorough").innerHTML = document.getElementById("borough").value;
+                document.getElementById("aBorough").setAttribute("href","/api/restaurant/borough/"+document.getElementById("borough").value);
+            break;
+            case "cuisine":
+                document.getElementById("spanCuisine").innerHTML = document.getElementById("cuisine").value;
+                document.getElementById("aCuisine").setAttribute("href","/api/restaurant/cuisine/"+document.getElementById("cuisine").value);
+            break;
+
+        }
+    }
+</script>
+</head>
+    <script src="https://ajax.cloudflare.com/cdn-cgi/scripts/7089c43e/cloudflare-static/rocket-loader.min.js" data-cf-settings="853acdae7fea052e07b300ff-|49"></script>
+        <body style="font-family: Montserrat;">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="tableHead" colspan="2">API Generator</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Search By Name<br><button type="button" class="btn btn-outline-primary" onclick="genURL('name')">Generate URL</button></td>
+                                    <td><input type="text" placeholder="Restaurant Name" id="name"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><a id="aName" target="_blank"><p style="font-family: courier;">http://restaurant.mybluemix.net/api/restaurant/name/<span id="spanName">RESTAURANT NAME</span></p></a></td>
+                                </tr>
+                                <tr>
+                                    <td>Search By Borough<br><button type="button" class="btn btn-outline-primary" onclick="genURL('borough')">Generate URL</button></td>
+                                    <td><input type="text" placeholder="Borough" id="borough"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><a id="aBorough" target="_blank"><p style="font-family: courier;">http://restaurant.mybluemix.net/api/restaurant/borough/<span id="spanBorough">BOROUGH</span></p></a></td>
+                                </tr>
+                                <tr>
+                                    <td>Search By Cuisine<br><button type="button" class="btn btn-outline-primary" onclick="genURL('cuisine')">Generate URL</button></td>
+                                    <td><input type="text" placeholder="Cuisine" id="cuisine"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><a id="aCuisine" target="_blank"><p style="font-family: courier;">http://restaurant.mybluemix.net/api/restaurant/cuisine/<span id="spanCuisine">CUISINE</span></p></a></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">For complex search, <br>http://restaurant.mybluemix.net/api/restaurant/name/NAME/borough/BOROUGH</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </body>
+    </html>

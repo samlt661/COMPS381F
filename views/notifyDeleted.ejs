@@ -1,0 +1,132 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous" type="3b52d2be6bb3881bae78e325-text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous" type="3b52d2be6bb3881bae78e325-text/javascript"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" type="3b52d2be6bb3881bae78e325-text/javascript"></script>
+        <title>Error | COMPS381F</title>
+        <style>
+            body{
+                background-color: #000;
+                font-family: 'Montserrat', sans-serif;
+                color: #fff;
+            }
+            .container{
+                margin-top: 50px;;
+                max-width: 1024px;
+            }
+            input[type=password],input[type=text], select {
+                width: 100%;
+                padding-top: 10px;
+                padding-left: 20px;
+                padding-bottom: 10px;
+                padding-right: 20px;
+                height: 60px;
+                margin: 10px;
+                display: inline-block;
+                border: 1px solid #fff;
+                border-radius: 0px;
+                background: #000;
+                color: #fff;
+                font-size: 20px;
+                font-family: Montserrat;
+                border-radius: 3px;
+            }
+            table{
+                background: #fff;
+            }
+            .table{
+                border-color: #ddd;
+            }
+            table.table-bordered{
+                border:1px solid #888;
+                margin-top:20px;
+            }
+            table.table-bordered > thead > tr > th{
+                border:1px solid #888;
+            }
+            table.table-bordered > tbody > tr > td{
+                border:1px solid #888;
+            }
+            .tableHead{
+                background-color: #a0a0a0;
+            }
+            @media (min-width: 1024px) {
+                .navbar-nav.navbar-center {
+                    position: absolute;
+                    left: 50%;
+                    transform: translate(-50%);
+                }
+            }
+            @media (min-width: 1024px) {
+                .navbar-nav.navbar-right {
+                    position: absolute;
+                    right: 0%;
+                    transform: translate(0%);
+                }
+            }
+
+        </style>
+    </head>
+    <script src="https://ajax.cloudflare.com/cdn-cgi/scripts/7089c43e/cloudflare-static/rocket-loader.min.js" data-cf-settings="853acdae7fea052e07b300ff-|49"></script>
+    <body style="font-family: Montserrat;">
+        <div style="text-align: center; font-size: 15px;">
+            <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light" style="align-content: center;text-align: center;z-index: 1;background-color:#fff;color:#000;">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon" style="color: #fff;"></span>
+                </button>
+                <a class="navbar-brand d-block d-lg-none" style="color: #000;" href="/readDB">Restaurant</a>
+                <a class="navbar-brand d-none d-lg-block" style="color: #000;" href="/readDB">Restaurant</a>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent" style="color:#FFF;">
+                    <ul class="navbar-nav mr-auto navbar-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/readDB">All Restaurant</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/search">Search Restaurant</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/addRestaurant">Add Restaurant</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">Logout</a>
+                        </li>
+                    </ul>
+                    <span class="navbar-nav mr-auto navbar-right navbar-text" style="right: 0%;">
+                        <span style="color: #000;">User: <%=userInfo %> </span>
+                    </span>
+                </div>
+            </nav>
+        </div>
+        <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <form method="POST" action="/deleteRestaurant"  enctype="multipart/form-data">
+                            <table style="text-align: center;" class="table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr><th class="tableHead">Prompt</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><div class="alert alert-<%=isShow %>" id="outputErrorMessage"><%=errorMsg %></div></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: #666666;">
+                                            <a href="/readDB"><button class="btn btn-outline-primary" type="button">Home Page</button></a>
+                                            
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <input type="hidden" name="_id" value="<%=path %>">
+                        </form>
+                    </div>
+                </div>
+        </div>
+
+    </body>
+</html>
