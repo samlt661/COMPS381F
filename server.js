@@ -509,9 +509,6 @@ app.get("/leaflet", (req,res) => {
 //GET the Show Error Poage
 app.get("/showError",(req,res)=>{
     console.log(`Showing Error, Type ${req.query.t}`);
-    if(!req.session.authenticated){
-        res.redirect("/");
-    }
     let redirectPath = "";
     if(req.query._id == null){
         redirectPath = "/readDB"
@@ -767,7 +764,13 @@ app.use(function(req, res, next) {
     res.redirect("/showError?t=404");
     next();
 });
-// For 500 Page Not Found
+// For 500 
+app.use(function(req, res, next) {
+    res.status(500);
+    res.redirect("/showError?t=500");
+    next();
+});
+// For 502 
 app.use(function(req, res, next) {
     res.status(502);
     res.redirect("/showError?t=502");
